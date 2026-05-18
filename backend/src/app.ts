@@ -6,7 +6,14 @@ import leadRoutes from './routes/leadRoutes.js'; // Add this import
 const app: Application = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:5173', // For local development
+    'http://localhost:4173', // For local Docker preview
+    'https://smart-leads-pipeline-management-das.vercel.app' 
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
