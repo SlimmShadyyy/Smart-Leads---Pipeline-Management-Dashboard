@@ -9,13 +9,15 @@ import {
   Menu, 
   X, 
   TrendingUp,
-  ShieldAlert
+  ShieldAlert, Moon, Sun
 } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext';
 
 export const DashboardLayout = () => {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   const handleLogout = () => {
     logout();
@@ -83,8 +85,26 @@ export const DashboardLayout = () => {
               </NavLink>
             );
           })}
+          <div className="mt-6">
+            <button 
+              onClick={toggleTheme}
+              className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800 transition-colors"
+            >
+              {theme === 'light' ? (
+                <>
+                  <Moon className="h-5 w-5" />
+                  Dark Mode
+                </>
+              ) : (
+                <>
+                  <Sun className="h-5 w-5" />
+                  Light Mode
+                </>
+              )}
+            </button>
+          </div>
         </nav>
-
+        
         {/* Sidebar Footer (User Info & Logout) */}
         <div className="p-4 bg-slate-950 border-t border-slate-800">
           <div className="flex items-center gap-3 mb-4 px-2">
